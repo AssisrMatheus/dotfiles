@@ -72,7 +72,7 @@ brew install neovim
 brew install tree-sitter
 
 # TODO check if prettierd exists
-brew install prettierd
+brew install fsouza/prettierd/prettierd
 
 ###############################################################################
 # Node
