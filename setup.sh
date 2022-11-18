@@ -39,6 +39,9 @@ brew install docker
 echo "Installing github cli"
 brew install gh
 
+echo "Installing neovim"
+brew install neovim
+
 ###############################################################################
 # Terminal
 ###############################################################################
