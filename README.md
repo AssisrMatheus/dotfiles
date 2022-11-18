@@ -17,3 +17,4 @@ Some places where I ~~copy~~get inspiration from
 - https://driesvints.com/blog/getting-started-with-dotfiles/
 - https://jogendra.dev/i-do-dotfiles
 - https://dotfiles.github.io/
+- https://dev.to/craftzdog/my-neovim-setup-for-react-typescript-tailwind-css-etc-58fb
