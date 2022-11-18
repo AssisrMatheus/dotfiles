@@ -36,6 +36,8 @@ brew install --cask iterm2
 echo "Installing docker"
 brew install docker
 
+echo "Installing github cli"
+brew install gh
 
 ###############################################################################
 # Terminal
