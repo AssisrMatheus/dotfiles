@@ -68,6 +68,12 @@ fi
 echo "Installing neovim"
 brew install neovim
 
+# TODO check if tree-sitter exists
+brew install tree-sitter
+
+# TODO check if prettierd exists
+brew install prettierd
+
 ###############################################################################
 # Node
 ###############################################################################
