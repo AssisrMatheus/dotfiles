@@ -67,6 +67,8 @@ fi
 # TODO check if neovim exists
 echo "Installing neovim"
 brew install neovim
+alias vim="nvim"
+alias vi="nvim"
 
 # TODO check if tree-sitter exists
 brew install tree-sitter
