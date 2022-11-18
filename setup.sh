@@ -27,20 +27,56 @@ brew install --cask font-hack-nerd-font
 brew install --cask font-meslo-nerd-font
 brew install --cask font-dejavu-nerd-font
 
-echo "Installing vscode"
-brew install --cask visual-studio-code
-
 echo "Installing iterm2"
 brew install --cask iterm2
 
-echo "Installing docker"
-brew install docker
+if [[ $(command -v docker) == "" ]]; then
+    echo "Installing docker"
+    brew install docker
+else
+    echo "Updating docker"
+    brew upgrade docker
+fi
 
-echo "Installing github cli"
-brew install gh
+if [[ $(command -v gh) == "" ]]; then
+    echo "Installing gh cli"
+    brew install gh
+else
+    echo "Updating gh cli"
+    brew upgrade gh
+fi
 
+if [[ $(command -v nvm) == "" ]]; then
+    echo "Installing nvm"
+    brew install nvm
+else
+    echo "Updating nvm"
+    brew upgrade nvm
+fi
+
+# Editors
+
+if [[ $(command -v code) == "" ]]; then
+    echo "Installing vscode" 
+    brew install --cask visual-studio-code
+else
+    echo "Updating vscode"
+    brew upgrade visual-studio-code
+fi
+
+# TODO check if neovim exists
 echo "Installing neovim"
 brew install neovim
+
+###############################################################################
+# Node
+###############################################################################
+
+nvm install --lts
+nvm use --lts
+
+npm i -g typescript@latest
+npm i -g typescript-language-server@latest
 
 ###############################################################################
 # Terminal
