@@ -95,6 +95,13 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm2"
 # iterm2: Load the preferences from the directory we just set
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
+# mac: turns off dock animation
+defaults write com.apple.dock autohide-time-modifier -int 0
+# mac: makes it so dock appears instantly when mouse hovers
+defaults write com.apple.Dock autohide-delay -float 0
+# mac: resets dock to read new settings
+killall Dock
+
 ###############################################################################
 # Cleanup
 ###############################################################################
