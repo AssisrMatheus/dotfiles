@@ -99,6 +99,8 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 # Mac settings
 ###############################################################################
 
+# The shortcuts are stored in NSUserKeyEquivalents dictionaries in ~/Library/Preferences/.GlobalPreferences.plist and the property lists of applications.
+
 # mac: turns off dock animation
 defaults write com.apple.dock autohide-time-modifier -int 0
 # mac: makes it so dock appears instantly when mouse hovers
@@ -117,6 +119,18 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
+# TODO: Find setting that turns on three finger drag
+
+# Makes sure to use simple quotes
+defaults write NSGlobalDomain KB_SingleQuoteOption -string "'abc'"
+defaults write NSGlobalDomain KB_DoubleQuoteOption -string "\"abc\""
+
+# Set language and text formats
+defaults write NSGlobalDomain AppleLanguages -array "fr-CA" "en-CA"
+defaults write NSGlobalDomain AppleLocale -string "fr_CA"
+defaults write NSGlobalDomain NSLinguisticDataAssetsRequested -array "en" "fr" "pt" "es" "it"
+defaults write NSGlobalDomain NSLinguisticDataAssetsRequestedByChecker -array "en" "fr" "pt" "es" "it"
+
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # Set a blazingly fast keyboard repeat rate
@@ -124,7 +138,7 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-defaults write com.apple.finder QuitMenuItem -bool true
+#defaults write com.apple.finder QuitMenuItem -bool true
 # Finder: show hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool true
 # Finder: show all filename extensions
