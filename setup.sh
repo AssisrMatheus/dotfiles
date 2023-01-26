@@ -185,6 +185,12 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # App store: Install System data files & security updates
 #defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
+# Turn off control+space hotkeys to switch input since this is used for vscode autocompletion
+plutil -replace AppleSymbolicHotKeys.60.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
+plutil -replace AppleSymbolicHotKeys.61.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
+# Makes sure the hotkeys we just set take effect (disabled because it's expected the user to restart after running this script anyway)
+#/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
 ###############################################################################
 # Git
 ###############################################################################
