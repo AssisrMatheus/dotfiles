@@ -85,6 +85,7 @@ nvm use --lts
 
 npm i -g typescript@latest
 npm i -g typescript-language-server@latest
+npx npm-merge-driver install -g
 
 ###############################################################################
 # Terminal
