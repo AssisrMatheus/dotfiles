@@ -30,6 +30,8 @@ brew install --cask font-dejavu-nerd-font
 echo "Installing iterm2"
 brew install --cask iterm2
 
+brew install git-lfs
+
 if [[ $(command -v docker) == "" ]]; then
     echo "Installing docker"
     brew install docker
