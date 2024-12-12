@@ -174,6 +174,9 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # App store: Install System data files & security updates
 defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
+# Disable windows opening animations observable in Google Chrome
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+
 # Turn off control+space hotkeys to switch input since this is used for vscode autocompletion
 plutil -replace AppleSymbolicHotKeys.60.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
 plutil -replace AppleSymbolicHotKeys.61.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
