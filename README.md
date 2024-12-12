@@ -31,6 +31,9 @@
 - Trouble
 - Zenmode+twilight
 - mason for lsps
+https://dev.to/craftzdog/my-neovim-setup-for-react-typescript-tailwind-css-etc-58fb ~ https://www.youtube.com/watch?v=ajmK0ZNcM4Q
+https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/#better-coding-experience
+https://youtu.be/IiwGbcd8S7I
 
 ## Resources
 Some places where I ~~copy~~get inspiration from 
