@@ -57,6 +57,7 @@ else
     brew upgrade visual-studio-code
 fi
 
+# Janky borders to be used with aerospace
 brew tap FelixKratz/formulae
 brew install borders
 
@@ -68,6 +69,8 @@ brew install tree-sitter
 
 # TODO check if prettierd exists
 brew install fsouza/prettierd/prettierd
+
+brew install ripgrep
 
 ###############################################################################
 # Node
