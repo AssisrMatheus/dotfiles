@@ -1,3 +1,5 @@
+mkdir ~/Developer
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -190,6 +192,8 @@ killall SystemUIServer
 
 git config --global user.email "assisr.matheus@gmail.com"
 git config --global user.name "AssisrMatheus"
+git lfs install
+git lfs install --system
   
 ###############################################################################
 # Cleanup
