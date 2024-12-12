@@ -90,14 +90,18 @@ defaults write -g NSWindowShouldDragOnGesture -bool true
 defaults write com.apple.dock autohide-time-modifier -int 0
 # mac: makes it so dock appears instantly when mouse hovers
 defaults write com.apple.Dock autohide-delay -float 0
-# mac: resets dock to read new settings
-killall Dock
 
 # Disable the sound effects on boot
 #sudo nvram SystemAudioVolume=" "
 
+# Makes it so fullscreen or dragging windows don't create new spaces
+defaults write com.apple.spaces spans-displays -bool true
+
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# On mission control, group apps by type
+defaults write com.apple.dock expose-group-apps -bool true
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -137,13 +141,11 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 # Finder: Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-killall Finder
 
 # Safari: Enable the Develop menu and the Web Inspector in Safari
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-killall Safari
 
 # App store: Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
@@ -175,6 +177,12 @@ plutil -replace AppleSymbolicHotKeys.60.enabled -bool NO ~/Library/Preferences/c
 plutil -replace AppleSymbolicHotKeys.61.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
 # Makes sure the hotkeys we just set take effect (disabled because it's expected the user to restart after running this script anyway)
 #/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
+# mac: resets dock to read new settings
+killall Dock
+killall Safari
+killall Finder
+killall SystemUIServer
 
 ###############################################################################
 # Git
