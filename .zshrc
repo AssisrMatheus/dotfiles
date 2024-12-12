@@ -64,9 +64,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-alias l="eza -l --icons --git -a"
-alias lt="eza -tree --level=2 --long --icons --git"
-
 # completion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
@@ -95,3 +92,8 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias l="eza -l --icons --git -a"
+alias lt="eza -tree --level=2 --long --icons --git"
+alias vim="nvim"
+alias vi="nvim"
