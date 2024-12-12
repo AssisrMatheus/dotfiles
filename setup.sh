@@ -27,18 +27,7 @@ brew install --cask font-hack-nerd-font
 brew install --cask font-meslo-nerd-font
 brew install --cask font-dejavu-nerd-font
 
-echo "Installing iterm2"
-brew install --cask iterm2
-
 brew install git-lfs
-
-if [[ $(command -v docker) == "" ]]; then
-    echo "Installing docker"
-    brew install docker
-else
-    echo "Updating docker"
-    brew upgrade docker
-fi
 
 if [[ $(command -v gh) == "" ]]; then
     echo "Installing gh cli"
@@ -85,24 +74,14 @@ brew install fsouza/prettierd/prettierd
 nvm install --lts
 nvm use --lts
 
-npm i -g typescript@latest
-npm i -g typescript-language-server@latest
-npx npm-merge-driver install -g
-
-###############################################################################
-# Terminal
-###############################################################################
-
-# iterm2: Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm2"
-# iterm2: Load the preferences from the directory we just set
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
 ###############################################################################
 # Mac settings
 ###############################################################################
 
 # The shortcuts are stored in NSUserKeyEquivalents dictionaries in ~/Library/Preferences/.GlobalPreferences.plist and the property lists of applications.
+
+# Allow to drag windows by clicking in it anywhere with cmd+ctrl
+defaults write -g NSWindowShouldDragOnGesture -bool true
 
 # mac: turns off dock animation
 defaults write com.apple.dock autohide-time-modifier -int 0
@@ -122,7 +101,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# TODO: Find setting that turns on three finger drag
+# TODO: Find setting that turns on three finger drag on accessibility
 
 # Makes sure to use simple quotes
 defaults write NSGlobalDomain KB_SingleQuoteOption -string "'abc'"
@@ -186,7 +165,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # App store: Download newly available updates in background
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # App store: Install System data files & security updates
-#defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
 # Turn off control+space hotkeys to switch input since this is used for vscode autocompletion
 plutil -replace AppleSymbolicHotKeys.60.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
