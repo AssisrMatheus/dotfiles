@@ -78,6 +78,9 @@ nvm use --lts
 # Mac settings
 ###############################################################################
 
+# Turn off mouse acceleration
+defaults write .GlobalPreferences com.apple.mouse.scaling -1 defaults write -g com.apple.mouse.scaling -1
+
 # The shortcuts are stored in NSUserKeyEquivalents dictionaries in ~/Library/Preferences/.GlobalPreferences.plist and the property lists of applications.
 
 # Allow to drag windows by clicking in it anywhere with cmd+ctrl
