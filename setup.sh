@@ -57,12 +57,12 @@ else
     brew upgrade visual-studio-code
 fi
 
+brew tap FelixKratz/formulae
+brew install borders
+
 # TODO check if neovim exists
 echo "Installing neovim"
 brew install neovim
-alias vim="nvim"
-alias vi="nvim"
-
 # TODO check if tree-sitter exists
 brew install tree-sitter
 
