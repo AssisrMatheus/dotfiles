@@ -1,14 +1,36 @@
 # dotfiles
 
-![CleanShot 2022-10-28 at 22 21 45](https://user-images.githubusercontent.com/12276174/198774457-3d0d0d96-cceb-4138-866b-10d32907cced.png)
+![image](https://github.com/user-attachments/assets/1195d50b-6034-44f4-9e92-8e1b34b5deaf)
+
 
 # Terminal setup
-- [oh-my-zsh](https://pascalnaber.wordpress.com/2019/10/05/have-a-great-looking-terminal-and-a-more-effective-shell-with-oh-my-zsh-on-wsl-2-using-windows/)
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+  ```zsh
+  git clone --depth 1 --filter=blob:none git@github.com:ryanoasis/nerd-fonts fonts &&
+  chmod a+rx ./fonts/install.sh && \
+  ./fonts/install.sh && \
+  rm -rf fonts
+  ```
 - [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-- [iTerm2](https://iterm2.com/)
-- [Powerlevel10k + `MesloLGS NF` font](https://github.com/romkatv/powerlevel10k)
-- [Fig](https://github.com/withfig/autocomplete)
-- [Nerd fonts](https://github.com/ryanoasis/nerd-fonts)
+- [Wezterm](https://wezfurlong.org/wezterm/index.html) (waiting on [Ghostty](https://ghostty.org/))
+- [zinit](https://github.com/zdharma-continuum/zinit) for plugins
+- [oh-my-posh](https://ohmyposh.dev/)
+
+# Extra tools:
+- [Timewarrior](https://timewarrior.net/docs/tutorial/)
+- [nushell](https://www.nushell.sh/)
+- [yazi](https://github.com/sxyazi/yazi)
+- [eza](https://github.com/eza-community/eza/tree/main) (aliased to ls)
+- [fzf](https://github.com/junegunn/fzf)
+- [zoxide](https://github.com/ajeetdsouza/zoxide#installation) (aliased to cd)
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- [lazydocker](https://github.com/jesseduffield/lazydocker)
+
+# Neovim plugins:
+- Telescope
+- Trouble
+- Zenmode+twilight
+- mason for lsps
 
 ## Resources
 Some places where I ~~copy~~get inspiration from 
