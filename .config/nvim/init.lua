@@ -541,7 +541,7 @@ require('lazy').setup({
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -625,8 +625,8 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        eslint = {},
-        ts_ls = {},
+        -- eslint = {},
+        -- ts_ls = {},
         --
 
         lua_ls = {
@@ -715,6 +715,8 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -798,7 +800,20 @@ require('lazy').setup({
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
           ['<C-Space>'] = cmp.mapping.complete {},
+          -- Overload tab to accept Copilot suggestions.
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            local copilot = require 'copilot.suggestion'
 
+            if copilot.is_visible() then
+              copilot.accept()
+            elseif cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
           --  function $name($args)
@@ -882,7 +897,21 @@ require('lazy').setup({
         },
       }
 
-      require('mini.move').setup()
+      require('mini.move').setup {
+        mappings = {
+          -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+          left = '<C-M-h>',
+          right = '<C-M-l>',
+          down = '<C-M-j>',
+          up = '<C-M-k>',
+
+          -- Move current line in Normal mode
+          line_left = '<C-M-h>',
+          line_right = '<C-M-l>',
+          line_down = '<C-M-j>',
+          line_up = '<C-M-k>',
+        },
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
