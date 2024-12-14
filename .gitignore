@@ -1,1 +1,12 @@
-.ssh
+# Ignore everything
+*
+
+# Except the following files
+!.gitignore
+!.aerospace.toml
+!.posh.toml
+!.wezterm.lua
+!.zshrc
+!setup.sh
+!.config/nvim
+.config/nvim/lazy-lock.json

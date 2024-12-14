@@ -3,7 +3,9 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  -- Automatically close brackets, quotes, etc
   require 'kickstart.plugins.autopairs',
+  -- Explorer like file treeg
   require 'kickstart.plugins.neo-tree',
   {
     'pmizio/typescript-tools.nvim',
@@ -31,13 +33,15 @@ return {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
+  { 'zbirenbaum/copilot.lua', opts = {} },
+  -- Ai autocomplete
   {
     'yetone/avante.nvim',
     event = 'VeryLazy',
     lazy = true,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      -- add any opts here
+      provider = 'copilot',
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',
@@ -77,6 +81,7 @@ return {
       },
     },
   },
+  -- Auto tag on html/jsx
   {
     'windwp/nvim-ts-autotag',
     config = function()
@@ -97,5 +102,34 @@ return {
         },
       }
     end,
+  },
+  -- auto saving sessions before exiting Neovim and getting back to work when you come back.
+  {
+    'rmagatti/auto-session',
+    config = function()
+      local auto_session = require 'auto-session'
+
+      auto_session.setup {
+        auto_restore_enabled = false,
+        auto_session_suppress_dirs = { '~/', '~/Dev/', '~/Downloads', '~/Documents', '~/Desktop/' },
+      }
+
+      local keymap = vim.keymap
+
+      keymap.set('n', '<leader>wr', '<cmd>SessionRestore<CR>', { desc = 'Restore session for cwd' }) -- restore last workspace session for current directory
+      keymap.set('n', '<leader>ws', '<cmd>SessionSave<CR>', { desc = 'Save session for auto session root dir' }) -- save workspace session for current working directory
+    end,
+  },
+  -- bufferline for better looking tabs
+  {
+    'akinsho/bufferline.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    version = '*',
+    opts = {
+      options = {
+        mode = 'tabs',
+        separator_style = 'slant',
+      },
+    },
   },
 }
