@@ -733,6 +733,7 @@ require('lazy').setup({
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -916,16 +917,16 @@ require('lazy').setup({
       require('mini.move').setup {
         mappings = {
           -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-          left = '<C-M-h>',
-          right = '<C-M-l>',
-          down = '<C-M-j>',
-          up = '<C-M-k>',
+          left = '<D-M-h>',
+          right = '<D-M-l>',
+          down = '<D-M-j>',
+          up = '<D-M-k>',
 
           -- Move current line in Normal mode
-          line_left = '<C-M-h>',
-          line_right = '<C-M-l>',
-          line_down = '<C-M-j>',
-          line_up = '<C-M-k>',
+          line_left = '<D-M-h>',
+          line_right = '<D-M-l>',
+          line_down = '<D-M-j>',
+          line_up = '<D-M-k>',
         },
       }
 
