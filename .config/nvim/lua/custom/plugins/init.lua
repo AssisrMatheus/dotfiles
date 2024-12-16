@@ -211,11 +211,6 @@ return {
   },
   { 'theHamsta/nvim-dap-virtual-text', opts = {} },
   {
-    'Chaitanyabsprip/fastaction.nvim',
-    ---@type FastActionConfig
-    opts = {},
-  },
-  {
     'okuuva/auto-save.nvim',
     version = '^1.0.0', -- see https://devhints.io/semver, alternatively use '*' to use the latest tagged release
     cmd = 'ASToggle', -- optional for lazy loading on command
@@ -228,4 +223,41 @@ return {
       debounce_delay = 400,
     },
   },
+  {
+    'nvimtools/none-ls.nvim', -- null-ls
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local null_ls = require 'null-ls'
+
+      null_ls.setup {
+        sources = {
+          -- ESLint code actions (e.g., `eslint-disable-next-line`)
+          null_ls.builtins.code_actions.eslint,
+
+          -- Custom code action for adding @ts-ignore
+          null_ls.builtins.code_actions.gitsigns.with {
+            method = null_ls.methods.CODE_ACTION, -- Enable code actions
+            generator = {
+              fn = function(context)
+                return {
+                  {
+                    title = 'Add @ts-ignore to ignore TypeScript error',
+                    action = function()
+                      local row = context.row
+                      vim.api.nvim_buf_set_lines(0, row - 1, row, false, { '// @ts-ignore' })
+                    end,
+                  },
+                }
+              end,
+            },
+          },
+        },
+      }
+    end,
+  },
+  -- {
+  --   'Chaitanyabsprip/fastaction.nvim',
+  --   ---@type FastActionConfig
+  --   opts = {},
+  -- },
 }
