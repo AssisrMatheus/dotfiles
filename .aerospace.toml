@@ -6,16 +6,12 @@ after-startup-command = [
 ]
 
 [[on-window-detected]]
-if.app-id = 'com.1password.1password'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.mail'
-run = 'layout floating'
+if.app-id = 'com.tinyspeck.slackmacgap'
+if.during-aerospace-startup = true
+run = ['move-node-to-workspace M']
 
 [workspace-to-monitor-force-assignment]
 4 = '^built-in retina display$' # Case insensitive regex match
@@ -59,7 +55,7 @@ alt-h = 'focus left'
 alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
-alt-f = 'layout floating'
+# alt-f = 'layout floating'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
@@ -156,23 +152,22 @@ cmd-m = []     # Disable minimize
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 
-# [mode.service.binding]
-# esc = ['reload-config', 'mode main']
-# r = ['flatten-workspace-tree', 'mode main'] # reset layout
-# f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-# backspace = ['close-all-windows-but-current', 'mode main']
-#
-# # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-# #s = ['layout sticky tiling', 'mode main']
-#
-# alt-shift-h = ['join-with left', 'mode main']
-# alt-shift-j = ['join-with down', 'mode main']
-# alt-shift-k = ['join-with up', 'mode main']
-# alt-shift-l = ['join-with right', 'mode main']
-#
-# down = 'volume down'
-# up = 'volume up'
-# shift-down = ['volume set 0', 'mode main']
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+#s = ['layout sticky tiling', 'mode main']
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+down = 'volume down'
+up = 'volume up'
+shift-down = ['volume set 0', 'mode main']
 
 [mode.apps.binding]
 alt-w = ['exec-and-forget open -n /Applications/WezTerm.app', 'mode main']

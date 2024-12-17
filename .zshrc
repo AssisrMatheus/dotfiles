@@ -112,3 +112,4 @@ alias vi="nvim"
 alias ls="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
 
+source ~/.zsh_env
