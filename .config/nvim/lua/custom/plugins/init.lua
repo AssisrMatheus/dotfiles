@@ -232,7 +232,7 @@ return {
       null_ls.setup {
         sources = {
           -- ESLint code actions (e.g., `eslint-disable-next-line`)
-          null_ls.builtins.code_actions.eslint,
+          --null_ls.builtins.code_actions.eslint_d,
 
           -- Custom code action for adding @ts-ignore
           null_ls.builtins.code_actions.gitsigns.with {

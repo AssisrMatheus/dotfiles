@@ -100,13 +100,13 @@ defaults write com.apple.Dock autohide-delay -float 0
 #sudo nvram SystemAudioVolume=" "
 
 # Makes it so fullscreen or dragging windows don't create new spaces
-defaults write com.apple.spaces spans-displays -bool true
+#defaults write com.apple.spaces spans-displays -bool false
 
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # On mission control, group apps by type
-defaults write com.apple.dock expose-group-apps -bool true
+#defaults write com.apple.dock expose-group-apps -bool false
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -129,7 +129,7 @@ defaults write NSGlobalDomain NSLinguisticDataAssetsRequestedByChecker -array "e
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 #defaults write com.apple.finder QuitMenuItem -bool true
