@@ -83,8 +83,6 @@ esac
 # Fix for s3cmd ref https://github.com/s3tools/s3cmd/issues/1349
 export PATH="/Users/assisrmatheus/Library/Python/3.9/bin:$PATH"
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
 # bun completions
 [ -s "/Users/assisrmatheus/.bun/_bun" ] && source "/Users/assisrmatheus/.bun/_bun"
