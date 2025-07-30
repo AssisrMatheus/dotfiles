@@ -7,11 +7,55 @@ return {
   require 'kickstart.plugins.autopairs',
   -- Explorer like file treeg
   require 'kickstart.plugins.neo-tree',
-  -- {
-  --   'pmizio/typescript-tools.nvim',
-  --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  --   opts = {},
-  -- },
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {
+      settings = {
+        -- Improve performance for large projects
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'all',
+          includeCompletionsForModuleExports = true,
+          quotePreference = 'auto',
+
+          -- Important for monorepos
+          includePackageJsonAutoImports = 'on',
+          importModuleSpecifierPreference = 'shortest',
+          allowIncompleteCompletions = true,
+          includeCompletionsForImportStatements = true,
+        },
+        tsserver_format_options = {
+          allowIncompleteCompletions = false,
+          allowRenameOfImportPath = true,
+        },
+        -- Increase memory limit for TypeScript
+        tsserver_max_memory = 8192,
+        -- Enable project references for monorepos
+        separate_diagnostic_server = true,
+        publish_diagnostic_on = 'insert_leave',
+        -- Expose advanced tsserver options
+        expose_as_code_action = 'all',
+        -- Include completions with insert text
+        complete_function_calls = true,
+      },
+      -- Handlers for better monorepo support
+      handlers = {
+        -- This helps with module resolution in monorepos
+        ['textDocument/definition'] = function(err, result, ctx, config)
+          if vim.tbl_islist(result) and #result > 1 then
+            -- If multiple definitions, try to filter out node_modules
+            local filtered = vim.tbl_filter(function(v)
+              return not string.find(v.targetUri or v.uri, 'node_modules')
+            end, result)
+            if #filtered > 0 then
+              result = filtered
+            end
+          end
+          vim.lsp.handlers['textDocument/definition'](err, result, ctx, config)
+        end,
+      },
+    },
+  },
   { 'JoosepAlviste/nvim-ts-context-commentstring', opts = { enable_autocmd = false } },
   {
     'kdheepak/lazygit.nvim',
@@ -89,52 +133,52 @@ return {
       end,
     },
   }, -- Ai autocomplete
-  {
-    'yetone/avante.nvim',
-    event = 'VeryLazy',
-    lazy = true,
-    version = false, -- set this if you want to always pull the latest change
-    opts = {
-      provider = 'copilot',
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = 'make',
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      'stevearc/dressing.nvim',
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-      --- The below dependencies are optional,
-      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
-      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-      'zbirenbaum/copilot.lua', -- for providers='copilot'
-      {
-        -- support for image pasting
-        'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
-      },
-    },
-  },
+  -- {
+  --   'yetone/avante.nvim',
+  --   event = 'VeryLazy',
+  --   lazy = true,
+  --   version = false, -- set this if you want to always pull the latest change
+  --   opts = {
+  --     provider = 'claude',
+  --   },
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = 'make',
+  --   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+  --   dependencies = {
+  --     'stevearc/dressing.nvim',
+  --     'nvim-lua/plenary.nvim',
+  --     'MunifTanjim/nui.nvim',
+  --     --- The below dependencies are optional,
+  --     'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
+  --     'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
+  --     'zbirenbaum/copilot.lua', -- for providers='copilot'
+  --     {
+  --       -- support for image pasting
+  --       'HakonHarnes/img-clip.nvim',
+  --       event = 'VeryLazy',
+  --       opts = {
+  --         -- recommended settings
+  --         default = {
+  --           embed_image_as_base64 = false,
+  --           prompt_for_file_name = false,
+  --           drag_and_drop = {
+  --             insert_mode = true,
+  --           },
+  --           -- required for Windows users
+  --           use_absolute_path = true,
+  --         },
+  --       },
+  --     },
+  --     {
+  --       -- Make sure to set this up properly if you have lazy=true
+  --       'MeanderingProgrammer/render-markdown.nvim',
+  --       opts = {
+  --         file_types = { 'markdown', 'Avante' },
+  --       },
+  --       ft = { 'markdown', 'Avante' },
+  --     },
+  --   },
+  -- },
   -- Auto tag on html/jsx
   {
     'windwp/nvim-ts-autotag',

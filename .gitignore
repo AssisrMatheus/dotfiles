@@ -10,3 +10,7 @@
 !setup.sh
 !.config/nvim
 .config/nvim/lazy-lock.json
+!.config/ghostty
+!.gitconfig
+!.profile
+!dev/vimNotes.md
