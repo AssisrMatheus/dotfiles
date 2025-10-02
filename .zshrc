@@ -1,5 +1,9 @@
 #zmodload zsh/zprof
 
+alias vim="nvim"
+alias vi="nvim"
+export EDITOR="nvim"
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -104,10 +108,9 @@ function ff() {
   aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {2}")+abort'
 }
 
-alias vim="nvim"
-alias vi="nvim"
 alias ls="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
+alias lg="lazygit"
 
 source ~/.zsh_env
 
