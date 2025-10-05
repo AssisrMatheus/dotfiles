@@ -681,11 +681,20 @@ require('lazy').setup({
       }
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      -- Set up LSP servers manually without mason-lspconfig
+      -- Set up LSP servers
       for server_name, server_config in pairs(servers) do
         -- Skip ts_ls since we're using typescript-tools.nvim
         if server_name ~= 'ts_ls' then
           server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+
+          -- Ensure position encoding is set
+          if not server_config.capabilities.general then
+            server_config.capabilities.general = {}
+          end
+          if not server_config.capabilities.general.positionEncodings then
+            server_config.capabilities.general.positionEncodings = { 'utf-16' }
+          end
+
           require('lspconfig')[server_name].setup(server_config)
         end
       end

@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd('FileType', {
       local root_dir = vim.fs.dirname(tsconfigs[1])
 
       -- For typescript-tools, we can specify workspace folders
-      local clients = vim.lsp.get_active_clients { bufnr = ev.buf }
+      local clients = vim.lsp.get_clients { bufnr = ev.buf }
       for _, client in ipairs(clients) do
         if client.name == 'typescript-tools' then
           -- typescript-tools handles workspace folders automatically

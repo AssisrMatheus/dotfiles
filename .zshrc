@@ -122,3 +122,12 @@ fif() {
 }
 
 #zprof
+
+export PATH="/opt/homebrew/opt/postgresql@14/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@14/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@14/include"
+export PKG_CONFIG_PATH="/usr/local/opt/postgresql@14/lib/pkgconfig"
+export PATH="/Users/assisrmatheus/.local/bin:$PATH"
+set -o vi
+
+launchctl setenv CHROME_HEADLESS 1
