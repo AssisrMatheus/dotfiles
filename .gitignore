@@ -12,6 +12,8 @@
 .config/nvim/lazy-lock.json
 !.config/ghostty
 !.config/starship.toml
+!.config/lazygit
+!.config/lazygit/config.yml
 !.gitconfig
 !.profile
 !dev/vimNotes.md

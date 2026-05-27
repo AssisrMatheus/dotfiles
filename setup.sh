@@ -23,6 +23,25 @@ brew install fsouza/prettierd/prettierd
 
 brew install ripgrep
 
+###############################################################################
+# Terminal / shell tooling
+###############################################################################
+
+# Fish-flavored zsh: prompt, autosuggestions, fuzzy finding, dir jumper, modern ls
+brew install starship
+brew install fzf
+brew install zoxide
+brew install eza
+brew install fd
+brew install bat
+brew install fnm
+brew install lazygit
+brew install jesseduffield/lazydocker/lazydocker
+brew install yazi
+
+# Pretty git diffs (used by both git and lazygit as pager + mergetool)
+brew install git-delta
+
 
 ###############################################################################
 # Mac settings

@@ -1,0 +1,58 @@
+gui:
+  # Split the main window to show staged/unstaged changes
+  # 'always' = always split, 'auto' = only split when file has both
+  splitDiff: 'always'
+
+  # Increase main panel size for better visibility
+  sidePanelWidth: 0.3
+
+  # Show icons in file tree
+  showFileTree: true
+
+  # Expanded main panel on startup
+  expandFocusedSidePanel: false
+
+git:
+  paging:
+    colorArg: always
+    # Side-by-side diffs with clickable line numbers (jumps to that line in nvim).
+    # Press `|` inside lazygit to cycle through the configured pagers.
+    pager: delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+
+  pagers:
+    - pager: delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+    - pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+    - pager: less
+
+  # Use diff3 style for conflicts
+  merging:
+    # Don't auto-commit after merge
+    manualCommit: false
+
+# JetBrains/Kraken-style diff + merge powered by nvim diffview.
+# - <c-d> on files panel: open working-tree vs HEAD in diffview
+# - <c-d> on commits panel: open that single commit in diffview
+# - <c-h> on commits panel: file history for the current file
+# - M on a conflicted file is already lazygit's built-in mergetool launcher;
+#   git is configured to use nvimdiff via diffview as its mergetool.
+customCommands:
+  - key: '<c-d>'
+    context: 'files'
+    description: 'Open Diffview (working tree vs HEAD)'
+    command: "nvim -c 'DiffviewOpen' -c 'only'"
+    subprocess: true
+  - key: '<c-d>'
+    context: 'commits,reflogCommits,subCommits'
+    description: 'Open this commit in Diffview'
+    command: "nvim -c 'DiffviewOpen {{.SelectedLocalCommit.Sha}}^!' -c 'only'"
+    subprocess: true
+  - key: '<c-d>'
+    context: 'stash'
+    description: 'Open this stash in Diffview'
+    command: "nvim -c 'DiffviewOpen {{.SelectedStashEntry.Name}}^!' -c 'only'"
+    subprocess: true
+  - key: '<c-h>'
+    context: 'files,commits,reflogCommits,subCommits'
+    description: 'File history for current file'
+    command: "nvim -c 'DiffviewFileHistory {{.SelectedFile.Name}}' -c 'only'"
+    subprocess: true
