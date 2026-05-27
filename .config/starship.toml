@@ -1,0 +1,119 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Two-line, fish-flavored prompt.
+# Line 1: directory + git + language/runtime context + command duration
+# Line 2: status-aware character
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$nodejs\
+$bun\
+$python\
+$rust\
+$golang\
+$package\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+command_timeout = 1000
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[username]
+style_user = "yellow bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = false
+
+[hostname]
+ssh_only = true
+format = "on [$hostname](bold purple) "
+
+[directory]
+style = "bold cyan"
+truncation_length = 4
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only = " "
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[directory.substitutions]
+"Developer" = " "
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "bold red"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = "\\$"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration](bold yellow) "
+
+[nodejs]
+symbol = " "
+style = "bold green"
+format = "via [$symbol($version )]($style)"
+detect_extensions = []
+detect_files = ["package.json", ".nvmrc"]
+
+[bun]
+symbol = "🥟 "
+style = "bold yellow"
+format = "via [$symbol($version )]($style)"
+
+[python]
+symbol = " "
+style = "bold yellow"
+format = 'via [$symbol${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[rust]
+symbol = " "
+style = "bold red"
+format = "via [$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+style = "bold cyan"
+format = "via [$symbol($version )]($style)"
+
+[package]
+symbol = "󰏗 "
+style = "bold 208"
+format = "is [$symbol$version]($style) "
+disabled = true
+
+[time]
+disabled = true
