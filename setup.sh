@@ -1,23 +1,9 @@
-mkdir ~/Developer
-
 # Ask for the administrator password upfront
 sudo -v
 
 ###############################################################################
 # Brew
 ###############################################################################
-
-# Checks if brew is installed
-if [[ $(command -v brew) == "" ]]; then
-    echo "Installing brew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-    echo "Updating brew"
-    brew update
-fi
-
-echo "Updating brew formulae"
-brew upgrade
 
 ####
 # Default Apps
@@ -31,60 +17,16 @@ brew install --cask font-dejavu-nerd-font
 
 brew install git-lfs
 
-if [[ $(command -v gh) == "" ]]; then
-    echo "Installing gh cli"
-    brew install gh
-else
-    echo "Updating gh cli"
-    brew upgrade gh
-fi
-
-if [[ $(command -v nvm) == "" ]]; then
-    echo "Installing nvm"
-    brew install nvm
-else
-    echo "Updating nvm"
-    brew upgrade nvm
-fi
-
-# Editors
-
-if [[ $(command -v code) == "" ]]; then
-    echo "Installing vscode" 
-    brew install --cask visual-studio-code
-else
-    echo "Updating vscode"
-    brew upgrade visual-studio-code
-fi
-
-# Janky borders to be used with aerospace
-brew tap FelixKratz/formulae
-brew install borders
-
-# TODO check if neovim exists
-echo "Installing neovim"
-brew install neovim
-# TODO check if tree-sitter exists
 brew install tree-sitter
 
-# TODO check if prettierd exists
 brew install fsouza/prettierd/prettierd
 
 brew install ripgrep
 
-###############################################################################
-# Node
-###############################################################################
-
-nvm install --lts
-nvm use --lts
 
 ###############################################################################
 # Mac settings
 ###############################################################################
-
-# Turn off mouse acceleration
-defaults write .GlobalPreferences com.apple.mouse.scaling -1 defaults write -g com.apple.mouse.scaling -1
 
 # The shortcuts are stored in NSUserKeyEquivalents dictionaries in ~/Library/Preferences/.GlobalPreferences.plist and the property lists of applications.
 
@@ -113,18 +55,6 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# TODO: Find setting that turns on three finger drag on accessibility
-
-# Makes sure to use simple quotes
-defaults write NSGlobalDomain KB_SingleQuoteOption -string "'abc'"
-defaults write NSGlobalDomain KB_DoubleQuoteOption -string "\"abc\""
-
-# Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "fr-CA" "en-CA"
-defaults write NSGlobalDomain AppleLocale -string "fr_CA"
-defaults write NSGlobalDomain NSLinguisticDataAssetsRequested -array "en" "fr" "pt" "es" "it"
-defaults write NSGlobalDomain NSLinguisticDataAssetsRequestedByChecker -array "en" "fr" "pt" "es" "it"
-
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # Set a blazingly fast keyboard repeat rate
@@ -132,7 +62,7 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-#defaults write com.apple.finder QuitMenuItem -bool true
+defaults write com.apple.finder QuitMenuItem -bool true
 # Finder: show hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool true
 # Finder: show all filename extensions
@@ -151,6 +81,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+defaults write -g NSAutoFillHeuristicControllerEnabled -bool false
 
 # App store: Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
@@ -172,8 +103,6 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 # App store: Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
-# App store: Download newly available updates in background
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # App store: Install System data files & security updates
 defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
@@ -181,8 +110,6 @@ defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 
 # Turn off control+space hotkeys to switch input since this is used for vscode autocompletion
-plutil -replace AppleSymbolicHotKeys.60.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
-plutil -replace AppleSymbolicHotKeys.61.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist
 # Makes sure the hotkeys we just set take effect (disabled because it's expected the user to restart after running this script anyway)
 #/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
@@ -196,8 +123,6 @@ killall SystemUIServer
 # Git
 ###############################################################################
 
-git config --global user.email "assisr.matheus@gmail.com"
-git config --global user.name "AssisrMatheus"
 git lfs install
 git lfs install --system
   
