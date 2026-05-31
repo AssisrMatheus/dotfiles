@@ -1,5 +1,8 @@
+-- Personal editor options (loaded via `lua/custom/init.lua`).
+
 -- Tree style file explorer (netrw)
 vim.cmd 'let g:netrw_liststyle = 3'
+
 vim.opt.wrap = false
 vim.opt.relativenumber = true
 

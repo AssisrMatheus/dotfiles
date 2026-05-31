@@ -8,12 +8,25 @@
 !.wezterm.lua
 !.zshrc
 !setup.sh
-!.config/nvim
+!.gitconfig
+!.profile
+
+# Re-include the parent dir chain so new (untracked) files under it are visible.
+# With the leading `*` rule above, every parent must be un-ignored explicitly.
+!.config/
+!dev/
+
+# Neovim config (kickstart + personal customizations). Track the whole tree...
+!.config/nvim/
+!.config/nvim/**
+# ...except the vim.pack lockfile (and the legacy lazy-lock.json), kept ignored
+# to avoid churn — same as kickstart's upstream default.
+.config/nvim/nvim-pack-lock.json
 .config/nvim/lazy-lock.json
+
+# Other tracked config
 !.config/ghostty
 !.config/starship.toml
 !.config/lazygit
 !.config/lazygit/config.yml
-!.gitconfig
-!.profile
 !dev/vimNotes.md
