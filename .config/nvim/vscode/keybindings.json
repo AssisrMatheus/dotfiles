@@ -1,0 +1,89 @@
+// Place your key bindings in this file to override the defaults
+[
+  // --- your existing bindings ---
+  {
+    "key": "alt+n",
+    "command": "explorer.newFile",
+    "when": "!editorFocus"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.quickTextSearch"
+  },
+  {
+    "key": "alt+w",
+    "command": "editor.emmet.action.wrapWithAbbreviation",
+    "when": "editorHasSelection",
+    "args": {
+      "abbreviation": "div"
+    }
+  },
+  {
+    "key": "alt+cmd+]",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "alt+cmd+[",
+    "command": "workbench.action.previousEditor"
+  },
+
+  // ==========================================================================
+  // vscode-neovim passthroughs
+  // --------------------------------------------------------------------------
+  // These forward special keys to the embedded Neovim so the <D-…> / <D-M-…>
+  // mappings in lua/vscode-config/keymaps.lua and plugins.lua (mini.move) fire.
+  // The "when" clause keeps normal VSCode behavior while in insert mode.
+  // ==========================================================================
+
+  // --- Cmd-key file/buffer mappings (handled in keymaps.lua) ---
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+s",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-s>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+shift+s",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-S>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+w",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-w>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+shift+tab",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-S-Tab>"
+  },
+
+  // --- mini.move: Cmd+Alt+hjkl to move lines/selections (normal + visual) ---
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+alt+h",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-M-h>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+alt+l",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-M-l>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+alt+j",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-M-j>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "cmd+alt+k",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<D-M-k>"
+  }
+]

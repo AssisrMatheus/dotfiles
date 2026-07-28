@@ -1,0 +1,215 @@
+{
+  "editor.fontFamily": "'Mono Code', monospace",
+  "editor.fontLigatures": true,
+  "workbench.colorCustomizations": {
+    "editorWhitespace.foreground": "#fbff00"
+  },
+
+  // Terminal
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+
+  // Git
+  "git.autofetch": true,
+
+  // Languages
+  "javascript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.experimental.expandableHover": true,
+  "typescript.updateImportsOnPaste.enabled": false,
+  "javascript.updateImportsOnPaste.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // Make goto actions open tab instead of mini editor
+  "editor.gotoLocation.multipleDeclarations": "goto",
+  "editor.gotoLocation.multipleImplementations": "goto",
+  "editor.gotoLocation.multipleReferences": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.alternativeDeclarationCommand": "editor.action.goToImplementation",
+  "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToImplementation",
+  "editor.gotoLocation.alternativeImplementationCommand": "editor.action.goToImplementation",
+  "editor.gotoLocation.alternativeReferenceCommand": "editor.action.goToImplementation",
+  "editor.gotoLocation.alternativeTypeDefinitionCommand": "editor.action.goToImplementation",
+
+  "workbench.editor.labelFormat": "short",
+  "editor.renderWhitespace": "trailing",
+
+  "zenMode.fullScreen": false,
+  "zenMode.hideLineNumbers": false,
+  "editor.accessibilitySupport": "off",
+  "explorer.confirmDelete": false,
+  "git.confirmSync": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "editor.inlineSuggest.enabled": true,
+  "playwright.reuseBrowser": true,
+  "editor.linkedEditing": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.tabSize": 2,
+  "workbench.colorTheme": "Monokai Pirokai - Beach Sunset",
+  "editor.stickyScroll.enabled": false,
+  "git.enableSmartCommit": true,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "breadcrumbs.showArrays": false,
+  "breadcrumbs.showBooleans": false,
+  "breadcrumbs.showConstants": false,
+  "breadcrumbs.showConstructors": false,
+  "breadcrumbs.showEnumMembers": false,
+  "breadcrumbs.showEnums": false,
+  "breadcrumbs.showEvents": false,
+  "breadcrumbs.showFields": false,
+  "breadcrumbs.showFunctions": false,
+  "breadcrumbs.showInterfaces": false,
+  "breadcrumbs.showKeys": false,
+  "breadcrumbs.showMethods": false,
+  "breadcrumbs.showModules": false,
+  "breadcrumbs.showNamespaces": false,
+  "breadcrumbs.showNull": false,
+  "breadcrumbs.showNumbers": false,
+  "breadcrumbs.showObjects": false,
+  "breadcrumbs.showOperators": false,
+  "breadcrumbs.showPackages": false,
+  "breadcrumbs.showProperties": false,
+  "breadcrumbs.showStrings": false,
+  "breadcrumbs.showStructs": false,
+  "breadcrumbs.showTypeParameters": false,
+  "breadcrumbs.showVariables": false,
+  "breadcrumbs.symbolPath": "off",
+  "git.openRepositoryInParentFolders": "always",
+  "i18n-ally.displayLanguage": "en",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[mjml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "breadcrumbs.showArrays": true,
+    "breadcrumbs.showBooleans": true,
+    "breadcrumbs.showConstants": true,
+    "breadcrumbs.showConstructors": true,
+    "breadcrumbs.showEnumMembers": true,
+    "breadcrumbs.showEnums": true,
+    "breadcrumbs.showEvents": true,
+    "breadcrumbs.showFields": true,
+    "breadcrumbs.showFunctions": true,
+    "breadcrumbs.showInterfaces": true,
+    "breadcrumbs.showKeys": true,
+    "breadcrumbs.showMethods": true,
+    "breadcrumbs.showModules": true,
+    "breadcrumbs.showNamespaces": true,
+    "breadcrumbs.showNull": true,
+    "breadcrumbs.showNumbers": true,
+    "breadcrumbs.showObjects": true,
+    "breadcrumbs.showOperators": true,
+    "breadcrumbs.showPackages": true,
+    "breadcrumbs.showProperties": true,
+    "breadcrumbs.showStrings": true,
+    "breadcrumbs.showStructs": true,
+    "breadcrumbs.showTypeParameters": true,
+    "breadcrumbs.showVariables": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.blame.editorDecoration.enabled": true,
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
+  "workbench.startupEditor": "none",
+
+  // ==========================================================================
+  // vscode-neovim
+  // --------------------------------------------------------------------------
+  // IMPORTANT: vscode-neovim conflicts with VSCodeVim (both register the `type`
+  // command). The old `extensions.experimental.affinity: { "vscodevim.vim": 1 }`
+  // setting was REMOVED here — you must also disable/uninstall the
+  // `vscodevim.vim` extension, or Neovim will fail to init with
+  // "command 'type' already exists".
+  // ==========================================================================
+
+  // Path to your Neovim binary (verified: `which nvim`)
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+
+  // Composite escape keys: jj -> escape ; jk -> escape + save
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    },
+    "jk": {
+      "command": "vscode-neovim.lua",
+      "args": [
+        [
+          "local code = require('vscode')",
+          "code.action('vscode-neovim.escape')",
+          "code.action('workbench.action.files.save')"
+        ]
+      ]
+    }
+  },
+  "vscode-neovim.compositeTimeout": 200,
+
+  // Editor look that mirrors your terminal nvim config
+  // (custom/options.lua: relativenumber + wrap=false ; init.lua: scrolloff=10)
+  "editor.lineNumbers": "relative",
+  "editor.cursorSurroundingLines": 10,
+  "editor.wordWrap": "off",
+
+  // Peek widget default focus so <Tab> toggles cleanly (see extension README)
+  "editor.peekWidgetDefaultFocus": "editor",
+
+  "security.promptForLocalFileProtocolHandling": false,
+  "chat.editing.confirmEditRequestRetry": false,
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.nextEditSuggestions.fixes": false,
+  "github.copilot.enable": {
+    "markdown": true,
+    "plaintext": true
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "chat.agent.enabled": true,
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": true,
+    "windsurf": true,
+    "cursor-global": true,
+    "cursor-workspace": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "zenMode.hideStatusBar": false,
+  "markdown.preview.markEditorSelection": false,
+  "markdown.preview.scrollEditorWithPreview": false,
+  "markdown.preview.scrollPreviewWithEditor": false,
+  "markdown.preview.typographer": true,
+  "zenMode.showTabs": "single",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "helium-icon-theme.hidesExplorerArrows": true,
+  "catppuccin-icons.hidesExplorerArrows": true,
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "redhat.telemetry.enabled": false,
+  "claudeCode.useTerminal": true,
+  "chat.mcp.gallery.enabled": true
+}

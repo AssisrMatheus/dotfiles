@@ -1,0 +1,31 @@
+modelRoles: 
+  default: anthropic/claude-opus-5:low
+  smol: openai-codex/gpt-5.6-sol
+  slow: openai-codex/gpt-5.6-sol
+  commit: anthropic/claude-sonnet-4-6:low
+  advisor: anthropic/claude-sonnet-4-6:low
+symbolPreset: nerd
+theme: 
+  dark: titanium
+  light: light
+setupVersion: 1
+retry: 
+  fallbackChains: 
+    default: 
+      - anthropic/claude-sonnet-4-6
+github: 
+  enabled: true
+statusLine: 
+  sessionAccent: true
+  transparent: false
+  compactThinkingLevel: false
+tui: 
+  tight: true
+display: 
+  cacheMissMarker: true
+task: 
+  showResolvedModelBadge: true
+  maxConcurrency: 2
+defaultThinkingLevel: low
+power: 
+  sleepPrevention: idle

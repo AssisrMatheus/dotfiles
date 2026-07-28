@@ -30,3 +30,10 @@
 !.config/lazygit
 !.config/lazygit/config.yml
 !dev/vimNotes.md
+# OMP configuration only; sessions, databases, logs, and runtime state stay local.
+!.omp/
+.omp/**
+!.omp/agent/
+!.omp/agent/APPEND_SYSTEM.md
+!.omp/agent/TITLE_SYSTEM.md
+!.omp/agent/config.yml
