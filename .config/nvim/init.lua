@@ -245,6 +245,30 @@ do
     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
     callback = function() vim.hl.on_yank() end,
   })
+
+  -- Silence `client.request is deprecated` (Nvim 0.12) coming from plugins that still
+  -- dot-call the LSP client instead of `client:request()`.
+  --
+  -- Nvim installs a per-client `request` wrapper that warns only when the first argument
+  -- is not the client itself. Reinserting `self` routes dot-calls through the non-deprecated
+  -- path without changing behaviour. Registered here, before any plugin loads, on purpose:
+  -- autocmds fire in creation order, so this must exist before a plugin's own LspAttach
+  -- handler. Remove once upstream plugins migrate (offender today: tailwind-tools.nvim).
+  vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'Route deprecated client.request dot-calls through client:request',
+    group = vim.api.nvim_create_augroup('lsp-request-compat', { clear = true }),
+    callback = function(event)
+      local client = vim.lsp.get_client_by_id(event.data.client_id)
+      if not client or rawget(client, '__request_compat') then return end
+
+      local wrapper = client.request
+      client.request = function(...)
+        if select(1, ...) == client then return wrapper(...) end
+        return wrapper(client, ...)
+      end
+      client.__request_compat = true
+    end,
+  })
 end
 
 -- ============================================================
@@ -383,13 +407,139 @@ do
   -- change the command under that to load whatever the name of that colorscheme is.
   --
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  vim.pack.add { gh 'loctvl842/monokai-pro.nvim' }
-  require('monokai-pro').setup {
-    filter = 'pro', -- pro, classic, machine, octagon, ristretto, spectrum
-  }
+  -- vim-only mirror of chriskempson/tomorrow-theme; the upstream repo nests its colors
+  -- under vim/colors/ so it is not a valid runtimepath plugin on its own. Dark variant.
+  -- Others shipped: Tomorrow-Night-Bright, -Eighties, -Blue, Tomorrow (light).
+  vim.pack.add { gh '13k/vim-tomorrow' }
+
+  do
+    -- Tomorrow Night palette, but every background forced to pure black (#000000)
+    -- instead of its default #1d1f21.
+    local BLACK = '#000000'
+
+    -- Groups whose background should become pure black. Foregrounds are left
+    -- untouched so the Tomorrow palette stays intact.
+    local bg_groups = {
+      'Normal',
+      'NormalNC',
+      'NormalFloat',
+      'FloatBorder',
+      'FloatTitle',
+      'SignColumn',
+      'LineNr',
+      'LineNrAbove',
+      'LineNrBelow',
+      'CursorLineNr',
+      'EndOfBuffer',
+      'Folded',
+      'FoldColumn',
+      'MsgArea',
+      'MsgSeparator',
+      'WinBar',
+      'WinBarNC',
+      'WinSeparator',
+      'VertSplit',
+      'TabLine',
+      'TabLineFill',
+      'StatusLine',
+      'StatusLineNC',
+      'Pmenu',
+      'PmenuSbar',
+      'PmenuExtra',
+      'PmenuKind',
+      'WildMenu',
+      'ColorColumn',
+      'DiagnosticSignError',
+      'DiagnosticSignWarn',
+      'DiagnosticSignInfo',
+      'DiagnosticSignHint',
+      'GitSignsAdd',
+      'GitSignsChange',
+      'GitSignsDelete',
+      -- plugin surfaces
+      'NeoTreeNormal',
+      'NeoTreeNormalNC',
+      'NeoTreeEndOfBuffer',
+      'NeoTreeWinSeparator',
+      'NeoTreeFloatBorder',
+      'NeoTreeFloatTitle',
+      'NeoTreeTabInactive',
+      'NeoTreeTabSeparatorInactive',
+      'TelescopeNormal',
+      'TelescopeBorder',
+      'TelescopePromptNormal',
+      'TelescopePromptBorder',
+      'TelescopeResultsNormal',
+      'TelescopeResultsBorder',
+      'TelescopePreviewNormal',
+      'TelescopePreviewBorder',
+      'TelescopeTitle',
+      'BlinkCmpMenu',
+      'BlinkCmpMenuBorder',
+      'BlinkCmpDoc',
+      'BlinkCmpDocBorder',
+      'BlinkCmpSignatureHelp',
+      'BlinkCmpSignatureHelpBorder',
+      'WhichKeyNormal',
+      'WhichKeyBorder',
+      'NotifyBackground',
+    }
+
+    -- Realign the generic syntax groups with the original Tomorrow Night palette
+    -- (chriskempson/tomorrow-theme). The vim port leaves Statement/Conditional/Repeat
+    -- at plain foreground and colours keywords only through legacy per-filetype groups
+    -- (cConditional, pythonStatement, javaScriptFunction, ...). Treesitter uses the
+    -- generic groups instead, so keywords came out grey and types blue.
+    local PURPLE = '#b294bb' -- tmTheme: Keyword, Storage
+    local YELLOW = '#f0c674' -- tmTheme: Class name, support.type (port ships this as cType)
+
+    local fg_overrides = {
+      -- keywords / storage
+      Statement = PURPLE,
+      Conditional = PURPLE,
+      Repeat = PURPLE,
+      Label = PURPLE,
+      Exception = PURPLE,
+      Keyword = PURPLE,
+      StorageClass = PURPLE,
+      Include = PURPLE, -- port had this blue; `import`/`#include` are keyword.control
+      -- types / classes
+      Type = YELLOW, -- port had this blue
+      Typedef = YELLOW,
+      -- Nvim's built-in default for @variable is #e0e2ea, brighter than Normal and not
+      -- part of the palette. Tomorrow renders plain identifiers at plain foreground.
+      ['@variable'] = '#c5c8c6',
+    }
+    -- Left as the port already has them, since they match the tmTheme:
+    -- Identifier red (Variable), Function blue (support.function), Constant orange,
+    -- String green, Operator aqua, Structure/PreProc/Define purple, Comment grey.
+
+    local function apply()
+      for _, group in ipairs(bg_groups) do
+        local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+        hl.bg = BLACK
+        vim.api.nvim_set_hl(0, group, hl)
+      end
+
+      for group, fg in pairs(fg_overrides) do
+        local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+        hl.fg = fg
+        vim.api.nvim_set_hl(0, group, hl)
+      end
+    end
+
+    -- Re-apply on every colorscheme load so plugins that set highlights late,
+    -- and `:colorscheme Tomorrow-Night` reloads, keep these overrides.
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      desc = 'Black background + Tomorrow palette fixes',
+      group = vim.api.nvim_create_augroup('tomorrow-night-tweaks', { clear = true }),
+      pattern = 'Tomorrow-Night',
+      callback = apply,
+    })
+  end
 
   -- Load the colorscheme here.
-  vim.cmd.colorscheme 'monokai-pro'
+  vim.cmd.colorscheme 'Tomorrow-Night'
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
